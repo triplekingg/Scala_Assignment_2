@@ -65,7 +65,48 @@ object DateUtil extends App {
     months(d._2-1)+"-"+d._1.toString+"-"+d._3
   }
 
-  def whatMonth(n: Int, yr: Int): Int = ???
+  def whatMonth(n: Int, yr: Int): Int = {
+    val isLeap = isLeapYear(yr)
+    try{
+      if(isLeap){
+        n match {
+          case i if i>0&&i<=31 => 1
+          case i if i<=60 => 2
+          case i if i<=91 => 3
+          case i if i<=121 => 4
+          case i if i<=152 => 5
+          case i if i<=182 => 6
+          case i if i<=213 => 7
+          case i if i<=244 => 8
+          case i if i<=274 => 9
+          case i if i<=305 => 10
+          case i if i<=335 => 11
+          case i if i<=366 => 12
+
+        }
+      }else {
+        n match {
+          case i if i>0&&i<=31 => 1
+          case i if i<=59 => 2
+          case i if i<=90 => 3
+          case i if i<=120 => 4
+          case i if i<=151 => 5
+          case i if i<=181 => 6
+          case i if i<=212 => 7
+          case i if i<=243 => 8
+          case i if i<=273 => 9
+          case i if i<=304 => 10
+          case i if i<=334 => 11
+          case i if i<=365 => 12
+
+        }
+      }
+    }
+    catch {
+      case e:MatchError => 0
+    }
+
+  }
 
   def oldest(dates: List[Date]): Option[Date] = ???
 
@@ -144,9 +185,10 @@ object DateUtil extends App {
   val d:Date = (3,1,2000)
   val lst1 = List(3,12,1)
   val lst = List(a,b,c,d)
+  println(whatMonth(366,2001))
 //  println(datesInMonth(lst,1))
 //  println(datesInMonths(lst,lst1))
-  println(dateToString(c))
+//  println(dateToString(c))
 //  println(numberInMonth(lst,9))
 //  println(numberInMonths(lst,lst1))
 //  println(isOlder(d,c))
