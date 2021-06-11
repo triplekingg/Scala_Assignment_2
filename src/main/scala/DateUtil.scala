@@ -50,13 +50,14 @@ object DateUtil extends App {
   }
 
   def datesInMonths(xs: List[Date], months: List[Int]): List[Date] = {
-    def helper(xs: List[Date],ys:List[Date],month_index:Int): List[Date] = {
-      if(month_index==months.length) ys
+    def helper(xs: List[Date],index:Int, months: List[Int], ys:List[List[Date]]): List[List[Date]] = {
+      if(index==months.length) ys
       else{
-        helper(xs,datesInMonth(xs,months(month_index)), month_index+1)
+        val y = datesInMonth(xs,months(index))
+        helper(xs, index+1, months, y::ys)
       }
     }
-    helper(xs,List(),0)
+    helper(xs,0,months,List()).reverse.flatten
   }
 
   def dateToString(d: Date): String = ???
