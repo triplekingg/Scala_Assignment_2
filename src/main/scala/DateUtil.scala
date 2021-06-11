@@ -60,7 +60,10 @@ object DateUtil extends App {
     helper(xs,0,months,List()).reverse.flatten
   }
 
-  def dateToString(d: Date): String = ???
+  def dateToString(d: Date): String = {
+    val months = List("January", "February","March","April","May","June","July","August","September","October","November","December")
+    months(d._2-1)+"-"+d._1.toString+"-"+d._3
+  }
 
   def whatMonth(n: Int, yr: Int): Int = ???
 
@@ -142,7 +145,8 @@ object DateUtil extends App {
   val lst1 = List(3,12,1)
   val lst = List(a,b,c,d)
 //  println(datesInMonth(lst,1))
-  println(datesInMonths(lst,lst1))
+//  println(datesInMonths(lst,lst1))
+  println(dateToString(c))
 //  println(numberInMonth(lst,9))
 //  println(numberInMonths(lst,lst1))
 //  println(isOlder(d,c))
