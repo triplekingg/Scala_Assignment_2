@@ -52,9 +52,9 @@ object ReadAloud extends App {
     helper(lst, 0, 1, List())
   }
 
-  val testing = List(5, 3, 2, 4, 6, 7)
-  println(readAloud(unreadAloud(testing)))
-  println(unreadAloud(testing))
+//  val testing = List(5, 3, 2, 4, 6, 7)
+//  println(readAloud(unreadAloud(testing)))
+//  println(unreadAloud(testing))
 
 
 }
