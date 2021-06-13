@@ -1,3 +1,5 @@
+import scala.None
+
 object DateUtil extends App {
   type Date = (Int, Int, Int)
 
@@ -82,7 +84,6 @@ object DateUtil extends App {
           case i if i<=305 => 10
           case i if i<=335 => 11
           case i if i<=366 => 12
-
         }
       }else {
         n match {
@@ -98,17 +99,33 @@ object DateUtil extends App {
           case i if i<=304 => 10
           case i if i<=334 => 11
           case i if i<=365 => 12
-
         }
       }
     }
     catch {
       case e:MatchError => 0
     }
-
   }
 
-  def oldest(dates: List[Date]): Option[Date] = ???
+  def oldest(dates: List[Date]): Option[Date] = {
+    def sort(xs: List[Date], oldest:Date, newest:Date, index:Int):Option[Date] = {
+      if(index==xs.length - 1) {
+        if(isOlder(oldest,newest)) Some(oldest)
+        else Some(newest)
+      }
+      else{
+        if( isOlder(xs(index),xs(index+1))) sort(xs,xs(index+1),xs(index),index+1)
+        else sort(xs,xs(index),xs(index+1),index+1)
+      }
+    }
+    if(dates.length==2){
+      if(isOlder(dates(0),dates(1))) Some(dates(0))
+      else Some(dates(1))
+    }
+    else if(dates.length==1) Some(dates(0))
+    else if(dates.isEmpty) None
+    else sort(dates,dates(0),dates(1),0)
+  }
 
   def isLeapYear(d:Int): Boolean = { //Helper function to check for leap year
     if(d % 4 == 0) //Check for leap year
@@ -179,13 +196,14 @@ object DateUtil extends App {
   }
 
 //  println(isReasonableDate((30,9,2000)))
-  val a:Date = (2,1,2000)
-  val b:Date = (2,1,2001)
-  val c:Date = (2,12,2000)
-  val d:Date = (3,1,2000)
-  val lst1 = List(3,12,1)
-  val lst = List(a,b,c,d)
-  println(whatMonth(366,2001))
+//  val a:Date = (2,1,1999)
+  //  val b:Date = (2,1,2001)
+  //  val c:Date = (2,12,1999)
+  //  val d:Date = (3,1,2000)
+  //  val lst1 = List(3,12,1)
+  //  val lst = List(a,b,c,d)
+  //  println(oldest(lst))
+//  println(whatMonth(366,2001))
 //  println(datesInMonth(lst,1))
 //  println(datesInMonths(lst,lst1))
 //  println(dateToString(c))
