@@ -21,10 +21,12 @@ object GraphBFS {
         )
       }
     }
+
     def iter2(helper_frontier: Set[V], helper_src: V, helper_parents: Map[V, V]): Map[V, V] = {
       if (helper_frontier.isEmpty) helper_parents
       else iter2(helper_frontier.tail, helper_src, helper_parents + (helper_frontier.head -> helper_src))
     }
+
     def map_helper(
                     helper_frontier: Set[V],
                     d: Int,
@@ -35,6 +37,7 @@ object GraphBFS {
         map_helper(helper_frontier.tail, d, distance + (helper_frontier.head -> d))
       }
     }
+
     //Helper functions defined above
     //---------------------------------------------------------------------------------------------
     def expand(
@@ -44,6 +47,7 @@ object GraphBFS {
               ): (Set[V], Map[V, V]) = {
       iter1(frontier, parent, Set(), Map(), visited)
     }
+
     def iterate(
                  frontier: Set[V],
                  parent: Map[V, V],
@@ -59,7 +63,8 @@ object GraphBFS {
         val dist = distance ++ map_helper(couple._1, d + 1, Map())
         iterate(couple._1, couple._2, dist, d + 1, visited ++ frontier)
       }
-    iterate(Set(src), Map(src -> src), Map(), 0,Set())
+
+    iterate(Set(src), Map(src -> src), Map(), 0, Set())
   }
 
 }
